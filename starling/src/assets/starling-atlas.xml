@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://texturepacker.com-->
+<!-- $TexturePacker:SmartUpdate:75e4f099b5b3d20e9ae541f9a34d9888$ -->
+<TextureAtlas imagePath="starling-atlas.png">
+    <SubTexture name="a1" x="24" y="90" width="20" height="20"/>
+    <SubTexture name="b2" x="24" y="68" width="20" height="20"/>
+    <SubTexture name="c3" x="2" y="90" width="20" height="20"/>
+    <SubTexture name="d4" x="2" y="68" width="20" height="20"/>
+    <SubTexture name="e5" x="24" y="46" width="20" height="20"/>
+    <SubTexture name="f6" x="2" y="46" width="20" height="20"/>
+    <SubTexture name="g7" x="24" y="24" width="20" height="20"/>
+    <SubTexture name="h8" x="2" y="24" width="20" height="20"/>
+    <SubTexture name="i9" x="24" y="2" width="20" height="20"/>
+    <SubTexture name="j10" x="2" y="2" width="20" height="20"/>
+</TextureAtlas>
