@@ -34,6 +34,7 @@ package
 	
 	import starling.animation.Transitions;
 	import starling.core.Starling;
+	import starling.display.Image;
 	import starling.display.MovieClip;
 	import starling.display.Sprite;
 	import starling.events.Event;
@@ -88,6 +89,8 @@ package
 		
 		public function StarlingStage()
 		{
+			var image:starling.display.Image = new Image(Texture.fromColor(480, 320, 0xFFFFFFFF));
+			this.addChild(image);
 			m_results = new Array();
 			m_queuedBenchmarks = new Array();
 			addEventListener(starling.events.Event.ADDED_TO_STAGE, onAdded);
@@ -109,36 +112,26 @@ package
 		
 		private function onAdded ( e:starling.events.Event ):void
 		{
+			trace("STARTING");
 			m_textureAtlas = new TextureAtlas(Texture.fromBitmap(new AtlasTexture()), new XML(new AtlasXml()));
 			queueBenchmark("Benchmark 1", 10, false, 0);
 			queueBenchmark("Benchmark 2", 50, false, 0);
 			queueBenchmark("Benchmark 3", 250, false, 0);
 			queueBenchmark("Benchmark 4", 500, false, 0);
-			queueBenchmark("Benchmark 5", 1000, false, 0);
-			queueBenchmark("Benchmark 6", 1500, false, 0);
 			
-			queueBenchmark("Benchmark 7", 10, true, 0);
-			queueBenchmark("Benchmark 8", 50, true, 0);
-			queueBenchmark("Benchmark 9", 250, true, 0);
-			queueBenchmark("Benchmark 10", 500, true, 0);
-			queueBenchmark("Benchmark 11", 1000, true, 0);
-			queueBenchmark("Benchmark 12", 1500, true, 0);
+			queueBenchmark("Benchmark 5", 10, true, 0);
+			queueBenchmark("Benchmark 6", 50, true, 0);
+			queueBenchmark("Benchmark 7", 250, true, 0);
+			queueBenchmark("Benchmark 8", 500, true, 0);
 			
 			
-			queueBenchmark("Benchmark 13", 10, true, 100);
-			queueBenchmark("Benchmark 14", 50, true, 100);
-			queueBenchmark("Benchmark 15", 250, true, 100);
-			queueBenchmark("Benchmark 16", 500, true, 100);
-			queueBenchmark("Benchmark 17", 1000, true, 100);
-			queueBenchmark("Benchmark 18", 1500, true, 100);
-			
-			queueBenchmark("Benchmark 19", 10, true, 200);
-			queueBenchmark("Benchmark 20", 50, true, 200);
-			queueBenchmark("Benchmark 21", 250, true, 200);
-			queueBenchmark("Benchmark 22", 500, true, 200);
-			queueBenchmark("Benchmark 23", 1000, true, 200);
-			queueBenchmark("Benchmark 24", 1500, true, 200);
-			
+			queueBenchmark("Benchmark 9", 100, true, 5);
+			queueBenchmark("Benchmark 10", 100, true, 10);
+			queueBenchmark("Benchmark 11", 100, true, 15);
+			queueBenchmark("Benchmark 12", 100, true, 20);
+			queueBenchmark("Benchmark 13", 100, true, 25);
+			queueBenchmark("Benchmark 14", 100, true, 35);
+			queueBenchmark("Benchmark 15", 100, true, 50);
 			doNextBenchmark();
 		}
 		
@@ -197,8 +190,8 @@ package
 			movieClip.loop = true;
 			movieClip.currentFrame = Math.floor(Math.random() * 10);
 			movieClip.play();
-			movieClip.x = 20 + Math.floor(Math.random() * (Starling.current.stage.stageWidth - 40));
-			movieClip.y = 20 + Math.floor(Math.random() * (Starling.current.stage.stageHeight - 40));
+			movieClip.x = 20 + Math.floor(Math.random() * (480 - 40));
+			movieClip.y = 20 + Math.floor(Math.random() * (320 - 40));
 			Starling.juggler.add(movieClip);
 			if(tween){
 				moveClip(movieClip);	
@@ -208,8 +201,8 @@ package
 		}
 		
 		protected function moveClip(clip:MovieClip):void{
-			var targetX:int = 20 + Math.floor(Math.random() * (Starling.current.stage.stageWidth - 40));
-			var targetY:int = 20 + Math.floor(Math.random() * (Starling.current.stage.stageHeight - 40));
+			var targetX:int = 20 + Math.floor(Math.random() * (480 - 40));
+			var targetY:int = 20 + Math.floor(Math.random() * (320 - 40));
 			Starling.juggler.tween(clip, 1.5, {
 				transition: Transitions.LINEAR,
 				repeatCount: 1,

@@ -4,14 +4,17 @@ package
 	import flash.desktop.SystemIdleMode;
 	import flash.display.Sprite;
 	import flash.display.StageAlign;
+	import flash.display.StageDisplayState;
 	import flash.display.StageQuality;
 	import flash.display.StageScaleMode;
+	import flash.events.Event;
+	import flash.geom.Rectangle;
 	import flash.media.AudioPlaybackMode;
 	import flash.media.SoundMixer;
 	
 	import starling.core.Starling;
 	
-	[SWF(width="960", height="640", frameRate="60", backgroundColor="#FFFFFF")]
+
 	public class Main extends Sprite
 	{
 		
@@ -21,26 +24,39 @@ package
 		
 		public function Main()
 		{
+			this.addEventListener(Event.ADDED_TO_STAGE, init);
+		}
+		
+		public function init(evt:*):void{
 			NativeApplication.nativeApplication.systemIdleMode = SystemIdleMode.KEEP_AWAKE;
-			super();
 			SoundMixer.audioPlaybackMode = AudioPlaybackMode.AMBIENT;
 			this.stage.frameRate = 60;
 			// support autoOrients
-			stage.align = StageAlign.TOP_LEFT;
-			stage.scaleMode = StageScaleMode.NO_SCALE;
-			stage.quality = StageQuality.LOW
+			this.stage.align = StageAlign.TOP_LEFT;
+			this.stage.scaleMode = StageScaleMode.NO_SCALE;
+			this.stage.quality = StageQuality.LOW
 			instance = this;
+			//stage.displayState = StageDisplayState.FULL_SCREEN;
 			// create our Starling instance
 			mStarling = new Starling(StarlingStage, stage);
-			
-			// set anti-aliasing (higher the better quality but slower performance)
-			mStarling.antiAliasing = 1;
-			
+			stage.addEventListener(Event.RESIZE, fitViewport);
+			this.fitViewport();
+			mStarling.addEventListener(Event.CONTEXT3D_CREATE, function(e:*):void{
+				fitViewport();
+				
+				trace("Factor is " + mStarling.contentScaleFactor);
+			});
 			mStarling.stage.stageWidth  = 480;
 			mStarling.stage.stageHeight = 320;	
 			
 			// start it!
 			mStarling.start();
 		}
+		
+		protected function fitViewport(evt:* = null):void{
+			mStarling.viewPort = new Rectangle(0, 0, stage.fullScreenWidth, stage.fullScreenHeight);
+		}
+		
+	
 	}
 }
